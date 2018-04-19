@@ -3,9 +3,9 @@ package com.dexin.gsonktdemo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.alibaba.fastjson.JSON
 import com.dexin.gsonktdemo.bean.Person
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,8 +26,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initParse() {
-        val gson = Gson().fromJson(result, Person::class.java)
-        Log.e("main", "Gson = " + gson.toString())
+        val list = Gson().fromJson<List<Person>>(result, object : TypeToken<List<Person>>() {}.type)
+        for (i in list) {
+            Log.e("main", i.toString())
+        }
     }
 
     private fun initData() {
