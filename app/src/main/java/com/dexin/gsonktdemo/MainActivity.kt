@@ -3,6 +3,10 @@ package com.dexin.gsonktdemo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.alibaba.fastjson.JSON
+import com.dexin.gsonktdemo.bean.Person
+import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,6 +16,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initData()
+        initListener()
+    }
+
+    private fun initListener() {
+        mMainBtn.setOnClickListener {
+            initParse()
+        }
+    }
+
+    private fun initParse() {
+        val gson = Gson().fromJson(result, Person::class.java)
+        Log.e("main", "Gson = " + gson.toString())
     }
 
     private fun initData() {
